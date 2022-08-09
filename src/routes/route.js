@@ -1,58 +1,69 @@
 const express = require('express');
-const abc = require('../introduction/intro')
 const router = express.Router();
-const logger = require('../logger/logger');
-const  infomation = require('../util/helper');
-const formatter = require('../validator/formatter')
-const _ = require('lodash');
-
-
-router.get('/test-me', function (req, res) {
-    
-    logger.welcome()
-     infomation.today()
-     formatter.form()
-    abc.printName()
-    res.send('My second ever api!')
-   
+//....................answer 1.....................//
+router.get('/movies', function (req, res) {
+       const movies = ["Tenet","The Btamna Begins","Pather Pachali","Charlie The Choclate Factory"];
+         res.send(movies);
 });
-// ---------------------------------// 
-router.get('/test-me1', function (req, res) {
-    let arr = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    res.send(_.chunk(arr,4));
+// ..................anwer2 ....................//
+router.get('/movies/:indexNumber', function (req, res){
+      const movies = ["Tenet","The Btamna Begins","Pather Pachali","Charlie The Choclate Factory"];
+      const index = req.params.indexNumber;
+      console.log(movies[index]);
+      res.send(movies[index]);
+})
+//................answer3....................//
+router.get('/movie/:indexNumber', function (req, res){
+    const movies = ["Tenet","The Btamna Begins","Pather Pachali","Charlie The Choclate Factory"];
+    const index = req.params.indexNumber;
+       if(index<4){
+        res.send(movies[index]);
+        console.log(movies[index]);
+       }else{
+        res.send("use a valid index");
+        console.log("use a valid index");
+       }
 });
-
-// ---------------------------------//
-    router.get('/test-me2', function (req, res) {
-    let odd = [1,3,5,7,9,11,12,13,14,15];
-    let newArr = _.tail(odd); 
-    res.send(newArr); 
+//..................answer4........................//
+router.get('/films', function (req, res){
+       const films = [{
+        "id": 1,
+        "name": "The Shining"
+       }, {
+        "id": 2,
+        "name": "Incendies"
+       }, {
+        "id": 3,
+        "name": "Rang de Basanti"
+       }, {
+        "id": 4,
+       "name": "Finding Nemo"
+       }]
+       res.send(films);
 });
-
-// ---------------------------------//
-    router.get('/test-me3', function (req, res) {
-    let arrNo = _.union([3,5],[6,9,2],[11,6,2]);
-    res.send(arrNo);
+//..............anmswer5....................//
+router.get('/films/:filmid', function (req, res){
+    const films = [{
+     "id": 1,
+     "name": "The Shining"
+    }, {
+     "id": 2,
+     "name": "Incendies"
+    }, {
+     "id": 3,
+     "name": "Rang de Basanti"
+    }, {
+     "id": 4,
+    "name": "Finding Nemo"
+    }];
+    const index1 = req.params.filmid;
+    if(index1<5 && index1>0 ){
+    res.send(films[index1-1]);
+    console.log(films[index1-1]);
+    }else{
+        res.send("No movie exists with this id");
+        console.log("No movie exists witht this id");
+    }
 });
-
-// ----------------------------------//
-    router.get('/test-me4', function (req, res) {
-    let pairs = [["horror","The Shining"],["drama","Titanic"],["thriller","Shutter Island"],["fantasy","Pans Labyrinth"]];
-    let un = _.fromPairs(pairs);
-    res.send(un);
-});
-
-
 
 module.exports = router;
-
-
-router.get('/test-you', function(req, res){
-    res.send('This is the second routes implementation')
-})
-
-router.get('/give-me-students-data',function(req, res){
-
-})
-module.exports = router;
-// adding this comment for no reason
