@@ -6,6 +6,6 @@ const authorSchema = new mongoose.Schema
     author_name: String,
     age: Number,
     rating: Number,
-}, {timestamps: true});
+}, {timestamps: false});
 
 module.exports = mongoose.model('Author', authorSchema);
