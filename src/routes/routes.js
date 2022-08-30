@@ -9,11 +9,11 @@ router.post('/createUser', userController.createUser);
 
 router.post('/loginUser',userController.loginUser);
 
-router.get('/getUser/:userId', auth.validToken , userController.getUser);
+router.get('/getUser/:userId', auth.validToken, auth.authorization , userController.getUser);
 
-router.put('/updateUser/:userId',auth.validToken, userController.updateUser);
+router.put('/updatedeUser/:userId',auth.validToken, auth.authorization,userController.updateUser);
 
-router.delete('/deleteUser/:userId',auth.validToken, userController.deleteUser);
+router.delete('/deleteUser/:userId',auth.validToken,auth.authorization, userController.deleteUser);
 
 
 module.exports = router;
