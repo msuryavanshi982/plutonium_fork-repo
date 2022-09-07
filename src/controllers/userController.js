@@ -16,7 +16,7 @@ const loginUser = async function(req,res){
     let password = req.body.password ;
     let login = await userModel.find({emailId: email, password: password});
     if(!login){
-        return res.semd({msg : "Email & Password is not correct"});
+        return res.send({msg : "Email & Password is not correct"});
     }
     let token = jwt.sign({
         userId : login._id ,    //payload
